@@ -11,7 +11,8 @@ double fp(double x){
 }
 
 int main(int argc, char *argv[]) {
-	double xv = 0.24, xn = 0, xvv = 0.5, error = 0;
+	// xv y xvv no pueden ser muy chicos
+	double xv = 1, xn = 0, xvv = 1.3, error = 0;
 	int tol = 0, iteraciones = 0;
 	
 	printf("Ingrese la tolerancia: ");
@@ -33,7 +34,7 @@ int main(int argc, char *argv[]) {
 		
 	} while(error > tolerancia && iteraciones <= 10000);
 	
-	printf("Xnuevo = %.10lf \n", xn);
+	printf("Xnuevo = %.12lf \n", xn);
 	if(f(xn) < tolerancia){
 		printf("Iteraciones = %d \n", iteraciones);
 		printf("Error = %.10lf", error);
