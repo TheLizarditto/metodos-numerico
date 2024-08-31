@@ -16,7 +16,7 @@ int main(int argc, char *argv[]) {
 	
 	printf("Ingrese la tolerancia: ");
 	scanf("%d", &tol);
-	double tolerancia = pow(10,-tol);
+	double tolerancia = pow(10, -tol);
 	
 	do{
 		iteraciones++;

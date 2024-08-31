@@ -13,16 +13,16 @@ int main(int argc, char *argv[]) {
     int pivot, producto;
 
     //modifica la matriz para que sea triangulable
-    for (int i=n-1; i >= 0; i--) {
+    for (int i = n-1; i >= 0; i--) {
         pivot = i;
         if (abs(a[i][i]) < pow(10, -5)) {
-            for (int j=i+1; j < n; j++) {
+            for (int j = i+1; j < n; j++) {
                 if (abs(a[j][i]) > abs(a[i][i])) {
                     pivot = j;
                 }
             }
 
-            for (int m=1; m < n; m++) {
+            for (int m = 1; m < n; m++) {
                 swap = a[pivot][m];
                 a[pivot][m] = a[i][m];
                 a[i][m] = swap;
@@ -35,11 +35,11 @@ int main(int argc, char *argv[]) {
     }
 
     // triangulacion
-    for (int i=0; i < n-1; i++) {
-        for (int j=i+1; j < n; j++) {
+    for (int i = 0; i < n-1; i++) {
+        for (int j = i+1; j < n; j++) {
             factor = - (a[j][i])/a[i][i];
 
-            for (int k=i; k < n; k++) {
+            for (int k = i; k < n; k++) {
                 a[j][k] = factor*a[i][k] + a[j][k];
             }
 
@@ -49,7 +49,7 @@ int main(int argc, char *argv[]) {
 
     // calcula el det
     producto = a[0][0];
-    for (int i=1; i < n; i++) {
+    for (int i = 1; i < n; i++) {
         producto *= a[i][i];
     }
 
@@ -61,17 +61,17 @@ int main(int argc, char *argv[]) {
     }
 
     // pivoteo parcial
-    for (int i=n-1; i >= 0; i--) {
+    for (int i = n-1; i >= 0; i--) {
         x[i] = b[i];
 
-        for (int j=i+1; j < n; j++) {
+        for (int j = i+1; j < n; j++) {
             x[i] -= a[i][j]*x[j];
         }
         x[i] /= a[i][i];
     }
 
-    for (int i=0; i < n; i++) {
-        printf("X%d: %lf \n", i, x[i]);
+    for (int i = 0; i < n; i++) {
+        printf("X%d: %.10lf \n", i, x[i]);
     }
 
     return 0;

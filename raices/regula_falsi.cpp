@@ -18,7 +18,7 @@ void diseccion(double a, double b, double tolerancia, short int porcentaje){
 	} else {
 		if (porcentaje == 1) {
 			do {
-				c = (a*f(b)-b*f(a))/(f(b)-f(a));
+				c = (a*f(b) - b*f(a))/(f(b) - f(a));
 				
 				if (f(a)*f(c) < 0){
 					b = c;
