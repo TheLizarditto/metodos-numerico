@@ -1,12 +1,12 @@
 #include <iostream>
-#include <cmath>
+#include<stdio.h>
+#include<stdlib.h>
+#include<cmath>
 using namespace std;
 
 #define n 3
 /*
-consiste en despejar cada incógnita de un sistema de ecuaciones lineales y resolverlas iterativamente. 
-Para cada ecuación, despejamos la incógnita actual usando los valores de las demás incógnitas,
-que son aproximaciones de la iteración anterior
+Jacobi pero usando lo que ya calculaste
 */
 
 int main(int argc, char *argv[]) {
@@ -17,7 +17,7 @@ int main(int argc, char *argv[]) {
     };
     double b[n] = {7, 9, 3};
     double xn[n], suma, error, errorv;
-    double xv[n] = {0}; // se podría ingresar a mano
+    double xv[n] = {0};
     int tol, iteracion = 0, i = 0, j = 0;
 
     printf("Ingrese la tolerancia: ");
@@ -39,51 +39,51 @@ int main(int argc, char *argv[]) {
         for (j = 0; j < n; j++) {
             suma += abs(a[i][j]);
         }
-        // el acumulador tmb sumo a[i][i], así que hay que eliminarlo
-		suma -= abs(a[i][i]);
+        suma -= a[i][i];
         
         if (abs(a[i][i]) <= suma) {
-            printf("La matriz no es diagonalmente dominante, el metodo podria no converger \n\n");
+            printf("No es diagonalmente dominante \n\n");
             break;
         }
     }
 
-    // que el error se achique con cada iteracion
     do {
         iteracion++;
         
         for (i = 0; i < n; i++) {
             suma = 0;
             
-            for (j = 0; j < n; j++) {
-                suma += a[i][j]*xv[j];
+            // Sumar los productos de los elementos de la izquierda de la diagonal
+            for(j = 0; j < i; j++){
+                suma += a[i][j]*xn[j];
             }
 
-			suma -= a[i][i] * xv[i];
-            xn[i] = (b[i] - suma)/a[i][i];
+            // Sumar los productos de los elementos de la derecha de la diagonal
+            for(j = i+1; j < n; j++){
+                suma += a[i][j]*xv[j];
+            }
+            xn[i] = (b[i] - suma) / (a[i][i]);
+
         }
-
-        // calculo del error usando Xn y Xv
+        // calcula el error cuadrático
         suma = 0;
-		for(i = 0; i < n; i++){
-			suma += pow((xn[i] - xv[i]), 2);
-		}
 
-        // calcula el error absoluto
+        for (i = 0; i < n; i++) {
+            suma += pow((xn[i] - xv[i]), 2);
+        }
         error = sqrt(suma);
-        
-        // chequeamos si el error se agranda
+
         if (errorv < error && iteracion > 1) {
             printf("El error se agranda, el metodo no converge \n");
             return 0;
         } else {
             errorv = error;
-            
-			for(i = 0; i < n; i++){
-				xv[i] = xn[i];
-			}
+
+            for(i = 0; i < n; i++) {
+                xv[i] = xn[i];
+            }
         }
-    } while (error > tol && iteracion <= 10000);
+    } while (error > tol && iteracion < 10000);
 
     printf("El error es: %.12lf \n", error);
     printf("Con %d iteraciones \n", iteracion);
