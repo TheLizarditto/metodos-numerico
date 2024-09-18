@@ -6,10 +6,6 @@ double f(double x){
 	return pow(x, 5) - 3*pow(x, 3) - 2*pow(x, 2) + 2;
 }
 
-double fp(double x){
-	return 5*pow(x, 4) - 9*pow(x, 2) - 4*x;
-}
-
 int main(int argc, char *argv[]) {
 	// xv y xvv no pueden ser muy chicos
 	double xv = 1, xn = 0, xvv = 1.3, error = 0;
@@ -22,11 +18,6 @@ int main(int argc, char *argv[]) {
 	do{
 		iteraciones++;
 		xn = xv - f(xv)*(xvv - xv)/(f(xvv) - f(xv));
-		
-		if(abs(fp(xn)) < pow(10,-10)){
-			printf("Demasiado grande");
-			exit(1);
-		}
 			
 		error = abs(xn-xv);
         xvv = xv;
