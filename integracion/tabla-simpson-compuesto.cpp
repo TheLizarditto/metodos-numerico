@@ -15,7 +15,7 @@ int main(int argc, char *argv[]) {
         suma += 2 * y[i] + 4 * y[i - 1];
     }
 
-    suma = h/3 * (4 * y[N - 2] + y[0] + y[N - 1] + suma);
+    suma = h/3 * (y[0] + y[N - 1] + suma);
     printf("El resultado es: %lf", suma);
 
     return 0;
