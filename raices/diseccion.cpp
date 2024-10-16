@@ -51,7 +51,7 @@ void diseccion(double a, double b, double tolerancia, short int porcentaje){
 					}
 				}
 				
-				error = ((b-a)/2)/c;
+				error = ((b-a)/2);
 				rondas++;
 			} while(error >= tolerancia);
 		}
