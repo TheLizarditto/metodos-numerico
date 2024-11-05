@@ -16,7 +16,7 @@ int main(int argc, char *argv[]) {
     
     do {
         printf("Ingrese el punto que quiera (0 para salir): ");
-        scanf("%d", puntos);
+        scanf("%d", &puntos);
 
         switch (puntos) {
             case 2:
@@ -80,16 +80,18 @@ int main(int argc, char *argv[]) {
                 
             default:
                 printf("Los puntos van de 2 a 6");
-                return 0;
+                break;
         }
 
-        for (int j = 0; j < puntos; j++) {
-            I += c[j] * f(((b - a) * x[j]) / 2 + (b + a) / 2 );
+        if(puntos > 1 && puntos < 7) {
+            for (int j = 0; j < puntos; j++) {
+                I += c[j] * f(((b - a) * x[j]) / 2 + (b + a) / 2 );
+            }
+            I *= (b - a) / 2;
+            printf("El resultado es: %lf", I);
         }
-        I *= (b - a) / 2;
+        printf("\n");
 
-        printf("El resultado es: %lf", I);
-        
     } while (puntos != 0);
     
     
