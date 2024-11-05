@@ -14,7 +14,7 @@ int main(int argc, char *argv[]) {
     double h, k1, k2, k3, k4;
     int n, sel;
 
-    printf("Error de orden h^4");
+    printf("Error de orden h^4\n");
 
     printf("Ingrese x_0: ");
     scanf("%lf", &x[0]);
@@ -51,7 +51,8 @@ int main(int argc, char *argv[]) {
         }
     } while (sel != 0 && sel != 1);
 
-    for (int i = 0; i < N - 1; i++) {
+    printf("\nX0 = %lf \tY0 = %lf", x[0], y[0]);
+    for (int i = 0; i < N; i++) {
         k1 = f(x[i], y[i]);
         k2 = f(x[i] + h / 2, y[i] + (h * k1) / 2);
         k3 = f(x[i] + h / 2, y[i] + (h * k2) / 2);
