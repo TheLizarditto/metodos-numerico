@@ -12,16 +12,16 @@ y no tenga saltos en las pendientes o curvaturas en los puntos donde se unen los
 //#define TAM 20
 //#define CANT_PUNTOS 5
 
-const int CANT_PUNTOS = 5; // cantidad de datos
+const int CANT_PUNTOS = 9; // cantidad de datos
 const int n = CANT_PUNTOS-1; // cantidad de subintervalos
 const int TAM = 4*n; // tamanio de las matrices A, b y z // sale de considerar que tenemos 4n incognitas y, por lo tanto, 4n ecuaciones
-//
+
 void spline_cubico(double A[TAM][TAM], double B[TAM], double x[TAM], double y[TAM]);
 void gauss(double A[TAM][TAM], double B[TAM], double *X);
 void imprimir(double A[TAM][TAM], double B[TAM]);
 void imprimir_ecuaciones(double* X, int n);
 void interpolar(double x[TAM], double y[TAM], double* X);
-//
+
 int main(int argc, char *argv[]) {
 	
 	bool op=true;
@@ -31,8 +31,8 @@ int main(int argc, char *argv[]) {
 	double b[TAM] = {0};// Inicializamos el vector b con ceros
 	double* X = (double*)malloc((4*(CANT_PUNTOS-1)) * sizeof(double));
 	//puntos
-	double x[TAM]={1.0,1.2,1.7,2.5,2.6};
-	double y[TAM]={2.4,5.3,6.8,7.2,7.5};
+	double x[TAM]={1, 1.02, 1.1, 1.23, 1.35, 1.5, 1.7, 1.86, 2};
+	double y[TAM]={0.098, 0.071, -0.043, -0.251, -0.453, -0.693, -0.945, -1.051, -1.053};
 	
 	//spline cubico
 	spline_cubico(A, b, x, y);
@@ -179,10 +179,10 @@ void gauss(double A[TAM][TAM], double B[TAM], double X[TAM]){
 	}
 }
 void imprimir_ecuaciones(double* X, int n){
-	printf("\nEcuaciones de los splines c�bicos:\n");
+	printf("\nEcuaciones de los splines cubicos:\n");
 	for (int i = 0; i < n; i++) {
-		printf("S_%d(x) = %.2lfx� ", i, X[4 * i]);
-		printf("%s %.2lfx� ", X[4 * i + 1] >= 0 ? "+ " : "- ", fabs(X[4 * i + 1]));
+		printf("S_%d(x) = %.2lfx^3 ", i, X[4 * i]);
+		printf("%s %.2lfx^2 ", X[4 * i + 1] >= 0 ? "+ " : "- ", fabs(X[4 * i + 1]));
 		printf("%s %.2lfx ", X[4 * i + 2] >= 0 ? "+ " : "- ", fabs(X[4 * i + 2]));
 		printf("%s %.2lf\n", X[4 * i + 3] >= 0 ? "+ " : "- ", fabs(X[4 * i + 3]));
 	}
@@ -215,5 +215,3 @@ printf("\nIngrese el valor a interpolar:");
 		printf("\nEl valor a interpolar no se encuentra en el rango de datos\n");
 	}	
 }
-		
-		

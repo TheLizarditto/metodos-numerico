@@ -14,12 +14,7 @@ int main(int argc, char *argv[]) {
     double h, k1, k2, k3, k4;
     int n, sel;
 
-	FILE *file = fopen("rungeKutta_tabla.txt", "w");
-	
-    if (file == NULL) {
-		printf("Error al abrir el archivo\n");
-		return 1;
-	}
+    printf("Error de orden h^4");
 
     printf("Ingrese x_0: ");
     scanf("%lf", &x[0]);
@@ -65,10 +60,7 @@ int main(int argc, char *argv[]) {
         y[i + 1] = y[i] + (h * (k1 + 2 * k2 + 2 * k3 + k4)) / 6;
         x[i + 1] = x[i] + h;
         printf("\nX%d = %lf \tY%d = %lf", i+1, x[i+1], i+1, y[i+1]);
-		fprintf(file, "%lf\t%lf\n", x[i+1], y[i+1]);
     }
 
-    fclose(file);
-    
     return 0;
 }

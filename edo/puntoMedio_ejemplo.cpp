@@ -21,14 +21,7 @@
 		x[0] = x0;
 		y[0] = y0;
 		
-		// Abrir el archivo para escritura
-		FILE *file = fopen("puntoMedio_tabla.txt", "w");
-		if (file == NULL) {
-			printf("Error al abrir el archivo.\n");
-			return 1;
-		}
-		
-		printf("Metodo de Punto Medio (Error de orden h�)\n");
+		printf("Metodo de Punto Medio (Error de orden h^3)\n");
 		
 		// Metodo de PuntoMedio
 		printf("\nX0 = %lf \tY0 = %lf", x0, y0); // Se imprime el primer el x0 e y0
@@ -39,9 +32,7 @@
 			y[i+1] = y[i] + h * f(xm, ym);
 			
 			printf("\nX%d = %lf \tY%d = %lf", i+1, x[i+1], i+1, y[i+1]);
-			fprintf(file, "%lf\t%lf\n",x[i+1], y[i+1]);
 		}
-		fclose(file);
 		return 0;
 	}
 

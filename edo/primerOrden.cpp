@@ -21,18 +21,6 @@ int main(int argc, char *argv[]) {
     double y2[N + 1];
     double h;
     int n, sel, metodo;
-    
-    FILE *file = fopen("primerOrdenEuler_tabla.txt", "w");
-    if (file == NULL) {
-        printf("Error al abrir el archivo\n");
-        return 1;
-    }
-
-    FILE *file2 = fopen("primerOrdenRk4_tabla.txt", "w");       
-    if (file2 == NULL) {
-        printf("Error al abrir el archivo\n");
-        return 1;
-    }
 
     do {
         printf("Elija si usar Euler o Rk4 (0: Euler, 1: Rk4): ");
@@ -83,7 +71,6 @@ int main(int argc, char *argv[]) {
                 y1[i + 1] = y1[i] + h * f1(x[i], y1[i], y2[i]);
                 y2[i + 1] = y2[i] + h * f2(x[i], y1[i], y2[i]);
                 printf("\nX%d = %lf \tY1%d = %lf \tY2%d = %lf", i+1, x[i+1], i+1, y1[i+1], y2[i+1]);
-                fprintf(file, "%lf\t%lf\t%lf\n", x[i+1], y1[i+1], y2[i+1]);
             }
             break;
         
@@ -145,7 +132,6 @@ int main(int argc, char *argv[]) {
                 y1[i + 1] = y1[i] + (k1[0] + 2*k2[0] + 2*k3[0] + k4[0])/6;
                 y2[i + 1] = y2[i] + (k1[1] + 2*k2[1] + 2*k3[1] + k4[1])/6;
                 printf("\nX%d = %lf \tY1%d = %lf \tY2%d = %lf", i+1, x[i+1], i+1, y1[i+1], y2[i+1]);
-                fprintf(file2, "%lf\t%lf\t%lf\n", x[i+1], y1[i+1], y2[i+1]);                             
             }
             break;
 
@@ -154,10 +140,6 @@ int main(int argc, char *argv[]) {
             break;
         }
     } while (metodo != 0 && metodo != 1);
-
-
-    fclose(file);
-    fclose(file2);
 
     return 0;
 }
